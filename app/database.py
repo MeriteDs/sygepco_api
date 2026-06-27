@@ -1,15 +1,17 @@
 from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
+import os
 
-# Configuration WampServer MySQL
-MYSQL_USER = 'root'
-MYSQL_PASSWORD = ''  # Sous Wamp, le mot de passe est vide par défaut
-MYSQL_HOST = 'localhost'
-MYSQL_PORT = '3306'
-MYSQL_DATABASE = 'sygepco_db'
+# ✅ Utiliser PostgreSQL (Render)
+DATABASE_URL = os.getenv(
+    "DATABASE_URL",
+    "postgresql://user:password@localhost:5432/sygepco_db"
+)
 
-DATABASE_URL = f"mysql+pymysql://{MYSQL_USER}:{MYSQL_PASSWORD}@{MYSQL_HOST}:{MYSQL_PORT}/{MYSQL_DATABASE}?charset=utf8mb4"
+# Si vous êtes sur Render, DATABASE_URL est automatiquement fourni
+if os.getenv("RENDER"):
+    DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(
     DATABASE_URL,
@@ -19,7 +21,6 @@ engine = create_engine(
 )
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
-
 Base = declarative_base()
 
 def get_db():
