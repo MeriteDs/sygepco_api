@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
-from app.database import Base, engine
 from app.routers import auth, profile, dossiers, metadata
+from app.database import Base, engine  # ✅ AJOUTER CET IMPORT
 
 # Créer les tables automatiquement au démarrage
 Base.metadata.create_all(bind=engine)
@@ -45,9 +45,9 @@ async def root():
 
 if __name__ == "__main__":
     import uvicorn
-    print("Démarrage de SYGEPCO API...")
-    print("http://localhost:8000")
-    print("Documentation: http://localhost:8000/docs")
+    print("🚀 Démarrage de SYGEPCO API...")
+    print("📍 http://localhost:8000")
+    print("📚 Documentation: http://localhost:8000/docs")
     uvicorn.run(
         "main:app",
         host="0.0.0.0",

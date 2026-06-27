@@ -3,15 +3,11 @@ from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 import os
 
-# ✅ Utiliser PostgreSQL (Render)
+# ✅ URL de la base de données PostgreSQL (Render)
 DATABASE_URL = os.getenv(
     "DATABASE_URL",
-    "postgresql://user:password@localhost:5432/sygepco_db"
+    "postgresql://sygepco_user:6joG4be7YJf8zP810P25Tgn0Z7WJYpCD@dpg-d8vud4jeo5us73blo3d0-a.oregon-postgres.render.com:5432/sygepco_db"
 )
-
-# Si vous êtes sur Render, DATABASE_URL est automatiquement fourni
-if os.getenv("RENDER"):
-    DATABASE_URL = os.getenv("DATABASE_URL")
 
 engine = create_engine(
     DATABASE_URL,
